@@ -1,0 +1,67 @@
+# แอพยืมหนังสือ
+
+books = {
+    "Python เบื้องต้น": True,
+    "การเขียนโปรแกรม": True,
+    "วิทยาศาสตร์": False,
+    "คณิตศาสตร์": True,
+    "ประวัติศาสตร์": False,
+    "ภาษาอังกฤษ": True
+}
+
+borrowed_books = []
+
+
+while True:
+    print("\n===== แอพยืมหนังสือ =====")
+    print("1. ค้นหาและยืมหนังสือ")
+    print("2. จัดการหนังสือที่ยืม")
+    print("3. ออกจากโปรแกรม")
+
+    choice = input("เลือกฟังก์ชัน: ")
+
+    # ฟังก์ชันที่ 1: ค้นหาและยืมหนังสือ
+    if choice == "1":
+        name = input("กรอกชื่อหนังสือ: ")
+
+        if name in books:
+            if books[name] == True:
+                print("พบหนังสือ:", name)
+                confirm = input("ต้องการยืมหนังสือหรือไม่? (y/n): ")
+
+                if confirm.lower() == "y":
+            
+                    books[name] = False
+                    borrowed_books.append(name)
+                    print("ยืมหนังสือสำเร็จ!")
+            else:
+                print("หนังสือเล่มนี้ถูกยืมไปแล้ว")
+        else:
+            print("ไม่พบหนังสือ")
+
+    # ฟังก์ชันที่ 2: จัดการหนังสือที่ยืม
+    elif choice == "2":
+        print("\n===== หนังสือที่กำลังยืม =====")
+
+        if len(borrowed_books) == 0:
+            print("ไม่มีหนังสือที่กำลังยืม")
+        else:
+            for book in borrowed_books:
+                print("-", book)
+
+            name = input("กรอกชื่อหนังสือที่ต้องการคืน: ")
+
+            if name in borrowed_books:
+                borrowed_books.remove(name)
+                books[name] = True
+                print("คืนหนังสือสำเร็จ!")
+            else:
+                print("ไม่พบหนังสือเล่มนี้ในรายการที่ยืม")
+
+    # ออกจากโปรแกรม
+    elif choice == "3":
+        print("จบการทำงาน")
+        break
+
+    else:
+        print("กรุณาเลือก 1, 2 หรือ 3")
